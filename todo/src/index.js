@@ -1,18 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-const LoginBox = () => {
-    return (
-        <span className="login">loginBox</span>
-    );
-}
+import AppHeader from './components/todo-header';
+import SearchPanel from './components/todo-searchpanel';
+import TodoList from './components/todo-list';
+
+
+
 
 const App = () => {
 
     return (
         <div>
-            <h1>Header</h1>
-            <LoginBox />
+            <AppHeader />
+            <SearchPanel />
+            <TodoList />
         </div>
     );
     
@@ -21,4 +23,5 @@ const App = () => {
 
 
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<App />, 
+    document.getElementById('root'));
