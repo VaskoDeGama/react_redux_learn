@@ -1,6 +1,10 @@
+import 'bootstrap/dist/css/bootstrap.min.css'
+import 'font-awesome/css/font-awesome.css'
 import React from 'react';
 import ReactDOM from 'react-dom';
-
+//import $ from 'jquery';
+//import Popper from 'popper.js';
+//import 'bootstrap/dist/js/bootstrap.bundle.min';
 import AppHeader from './components/todo-header';
 import SearchPanel from './components/todo-searchpanel';
 import TodoList from './components/todo-list';
