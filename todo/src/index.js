@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 //import $ from 'jquery';
 //import Popper from 'popper.js';
 //import 'bootstrap/dist/js/bootstrap.bundle.min';
-import AppHeader from './components/todo-header';
+import TodoHeader from './components/todo-header';
 import SearchPanel from './components/todo-searchpanel';
 import TodoList from './components/todo-list';
 import StatusFilter from './components/item-status-filter'
@@ -26,7 +26,7 @@ const App = () => {
 
     return (
         <div className="todo-app">
-            <AppHeader toDo={1} done={3} />
+            <TodoHeader toDo={1} done={3} />
             <div className="top-panel d-flex">
                 <SearchPanel />
                 <StatusFilter />
