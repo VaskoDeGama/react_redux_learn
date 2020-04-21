@@ -28,5 +28,5 @@ const TodoList = ({ todos, onDeleted,
             {elements}
         </ul>
     );
-}
+};
 export default TodoList;
