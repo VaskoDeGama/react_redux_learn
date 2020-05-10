@@ -8,7 +8,6 @@ import ErrorButton from "./components/error-button";
 import ErrorIndicator from "./components/error-indicator";
 import PeoplePage from "./components/people-page";
 import SwapiService from "./services/getResource";
-import StarshipsPage from "./components/starships-page";
 
 
 export default class App extends Component {
@@ -58,7 +57,6 @@ export default class App extends Component {
 
                 </div>
                 <PeoplePage/>
-                <StarshipsPage/>
             </div>
         );
     }
