@@ -2,12 +2,12 @@ import React, {Component} from "react"
 
 
 import './starships-page.css'
-import ItemList from "../item-list";
+
 
 import SwapiService from "../../services/getResource";
 import Row from "../row";
 import ErrorBoundary from "../error-boundary";
-import {ItemDetails, Record} from "../item-details/item-details";
+import {StarshipDetails, StarshipsList} from "../sw-components";
 
 
 
@@ -28,35 +28,21 @@ export default class StarshipsPage extends Component {
     render() {
 
         const itemList = (
-            <ErrorBoundary>
-                <ItemList
-                    onItemSelected={this.onItemSelected}
-                    getData={this.swapi.getAllStarships}>
-
-                    {(i) => (
-                        `${i.name} (${i.model})`
-                    )}
-
-                </ItemList>
-            </ErrorBoundary>
+                <ErrorBoundary>
+                    <StarshipsList>
+                        {({name}) => <span>{name}</span>}
+                    </StarshipsList>
+                </ErrorBoundary>
         );
 
-        const personDetails = (
+        const itemDetails = (
             <ErrorBoundary>
-                <ItemDetails
-                    itemId={this.state.itemSelected}
-                    getData={this.swapi.getStarships}
-                    getImageUrl={this.swapi.getStarshipImage}
-                >
-                    <Record field="model" label="Model" />
-                    <Record field="manufacturer" label="Manufacturer" />
-                    <Record field="length" label="Length" />
-                </ItemDetails>
+                <StarshipDetails itemId={11} />
             </ErrorBoundary>
         )
 
         return (
-            <Row left={itemList} right={personDetails} />
+            <Row left={itemList} right={itemDetails} />
         )
     }
 }

@@ -1,11 +1,10 @@
-import React, {Component} from "react"
+import React from "react"
 
 import './item-list.css'
-import SwapiService from "../../services/getResource";
-import {withData} from "../hoc-helpers/";
 
 
-const Itemlist = (props) => {
+
+const ItemList = (props) => {
 
     const {data, onItemSelected, children: renderLabel} = props
 
@@ -31,8 +30,4 @@ const Itemlist = (props) => {
 }
 
 
-
-
-const {getAllPeople} = new SwapiService()
-
-export default withData(Itemlist, getAllPeople)
+export default ItemList
