@@ -1,0 +1,108 @@
+import React, {Component} from "react"
+
+import './item-details.css'
+import SwapiService from "../../services/getResource";
+import Preloader from "../preloader";
+import ErrorButton from "../error-button";
+
+
+export const Record = ({item, field, label}) => {
+    return (
+        <li className="list-group-item">
+            <span className="term">{label}: </span>
+            <span>{item[field]} </span>
+        </li>
+    )
+};
+
+
+
+export class ItemDetails extends Component {
+
+    swapi = new SwapiService()
+
+    state = {
+        item: null,
+        loading: false,
+        image: null
+    }
+
+    componentDidMount() {
+        this.updateItem()
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (this.props.itemId !== prevProps.itemId) {
+            this.updateItem()
+        }
+    }
+
+
+    updateItem() {
+        this.setState({loading: true})
+
+        const {itemId, getData, getImageUrl} = this.props
+
+        if (!itemId) {
+            this.setState({loading: false})
+            return
+        }
+
+        getData(itemId)
+            .then((item) => {
+                this.setState({
+                    item,
+                    image: getImageUrl(item)
+                })
+            })
+            .finally(() => {
+                this.setState({loading: false})
+            })
+
+    }
+
+    render() {
+        const {item, loading, image} = this.state
+
+
+        if (!item) {
+            return <span>Select a item from a list</span>
+        }
+
+
+        if (!loading) {
+            return (
+                <div>
+                    <div className="person-details card">
+                        <img className="person-image"
+                             alt="img"
+                             src={image}/>
+
+                        <div className="card-body">
+                            <h4>{item.name}</h4>
+                            <ul className="list-group list-group-flush">
+                                {
+                                    React.Children.map(this.props.children, (child, idx) => {
+                                        return React.cloneElement(child, {item})
+                                    })
+                                }
+                                <li className="list-group-item"><ErrorButton/></li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            )
+        }
+
+        return (
+            <div>
+                <div className="person-details card">
+                    <Preloader/>
+                </div>
+            </div>
+        )
+
+    }
+}
+

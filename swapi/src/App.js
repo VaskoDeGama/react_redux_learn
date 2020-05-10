@@ -8,6 +8,7 @@ import ErrorButton from "./components/error-button";
 import ErrorIndicator from "./components/error-indicator";
 import PeoplePage from "./components/people-page";
 import SwapiService from "./services/getResource";
+import StarshipsPage from "./components/starships-page";
 
 
 export default class App extends Component {
@@ -47,14 +48,17 @@ export default class App extends Component {
                     <div className="col-md-12 mb-2">
                         <button
                             type="button"
-                            className="btn btn-warning"
+                            className="btn btn-warning mr-2"
                             onClick={this.toggleRandomPlanet}
                         >Toggle Random Planet</button>
-                        <ErrorButton />
+
+                            <ErrorButton />
+
                     </div>
 
                 </div>
                 <PeoplePage/>
+                <StarshipsPage/>
             </div>
         );
     }

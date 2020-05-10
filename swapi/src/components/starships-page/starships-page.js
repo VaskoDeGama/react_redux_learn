@@ -1,7 +1,7 @@
 import React, {Component} from "react"
 
 
-import './people-page.css'
+import './starships-page.css'
 import ItemList from "../item-list";
 
 import SwapiService from "../../services/getResource";
@@ -11,7 +11,7 @@ import {ItemDetails, Record} from "../item-details/item-details";
 
 
 
-export default class PeoplePage extends Component {
+export default class StarshipsPage extends Component {
     swapi = new SwapiService()
 
     state = {
@@ -31,10 +31,10 @@ export default class PeoplePage extends Component {
             <ErrorBoundary>
                 <ItemList
                     onItemSelected={this.onItemSelected}
-                    getData={this.swapi.getAllPeople}>
+                    getData={this.swapi.getAllStarships}>
 
                     {(i) => (
-                        `${i.name} (${i.birthYear})`
+                        `${i.name} (${i.model})`
                     )}
 
                 </ItemList>
@@ -45,12 +45,12 @@ export default class PeoplePage extends Component {
             <ErrorBoundary>
                 <ItemDetails
                     itemId={this.state.itemSelected}
-                    getData={this.swapi.getPerson}
-                    getImageUrl={this.swapi.getPersonImage}
+                    getData={this.swapi.getStarships}
+                    getImageUrl={this.swapi.getStarshipImage}
                 >
-                    <Record field="gender" label="Gender" />
-                    <Record field="eyeColor" label="Eye Color" />
-                    <Record field="birthYear" label="Birth Year" />
+                    <Record field="model" label="Model" />
+                    <Record field="manufacturer" label="Manufacturer" />
+                    <Record field="length" label="Length" />
                 </ItemDetails>
             </ErrorBoundary>
         )
