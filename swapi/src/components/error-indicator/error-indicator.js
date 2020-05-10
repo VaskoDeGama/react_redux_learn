@@ -6,7 +6,7 @@ import icon from './death-star.png'
 export default class ErrorIndicator extends Component {
     render() {
         return (
-            <div className="error-indicator">
+            <div className="error-indicator mb-2">
                 <img src={icon} alt="error icon"/>
                 <span className="boom">BOOM!</span>
                 <span>
