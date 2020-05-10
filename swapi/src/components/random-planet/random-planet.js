@@ -13,6 +13,7 @@ export default class RandomPlanet extends Component {
         planet: {},
         loading: true,
         error: false,
+        image: null
     }
 
 
@@ -46,19 +47,25 @@ export default class RandomPlanet extends Component {
         this.swapi
             .getPlanet(id)
             .then(this.onPlanetLoaded)
-            .catch(this.onError);
+            .catch(this.onError)
+            .finally(( )=> {
+                this.setState({
+                    image: this.swapi.getPlanetImage(this.state.planet)
+                })
+
+            })
     }
 
     render() {
 
-        const { planet, loading, error } = this.state
+        const { planet, loading, error , image } = this.state
 
 
         const hasData = !(loading || error)
 
         const errorMessage = error ? <ErrorIndicator /> : null
         const preloader = loading ? <Preloader /> : null
-        const content = hasData ? <PlanetView planet={planet} /> : null
+        const content = hasData ? <PlanetView planet={planet} image={image}/> : null
 
         return (
             <div className="random-planet jumbotron rounded mb-2">
@@ -70,14 +77,15 @@ export default class RandomPlanet extends Component {
     }
 }
 
-const PlanetView = ({planet}) => {
-    const {id, name, population, rotationPeriod, diameter} = planet
+const PlanetView = ({planet, image}) => {
+    const {name, population, rotationPeriod, diameter} = planet
+
 
     return (
         <React.Fragment>
             <img className="planet-image"
                  alt="img"
-                 src={`https://starwars-visualguide.com/assets/img/planets/${id}.jpg`} />
+                 src={image} />
             <div>
                 <h4>{name}</h4>
                 <ul className="list-group list-group-flush">
