@@ -9,6 +9,8 @@ import Row from "../row";
 import ErrorBoundary from "../error-boundary";
 
 import {PersonDetails, PersonList} from "../sw-components";
+import StarshipDetails from "../sw-components/starships-details";
+import PlanetDetails from "../sw-components/planet-details";
 
 
 export default class PeoplePage extends Component {
@@ -36,6 +38,7 @@ export default class PeoplePage extends Component {
         const itemDetails = (
             <ErrorBoundary>
                 <PersonDetails itemId={11} />
+
             </ErrorBoundary>
         )
 

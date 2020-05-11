@@ -1,15 +1,7 @@
 import Itemlist from "../item-list";
-import {withData} from "../hoc-helpers/";
-import SwapiService from "../../services/swapi-service";
+import {withData, withSwapiService} from "../hoc-helpers/";
 import React from "react";
 
-const swapi = new SwapiService()
-
-const {
-    getAllPeople,
-    getAllPlanet,
-    getAllStarships
-} = swapi
 
 const withChildFunction = (Wrapped, fn) => {
     return (props) => {
@@ -26,18 +18,32 @@ const renderName = ({name}) => <span>{name}</span>
 const renderModelAndName = ({name, model}) => <span>{`${name}, (${model})`}</span>
 
 
-const PersonList = withData(
-    withChildFunction(Itemlist, renderName),
-    getAllPeople
-)
-const PlanetList = withData(
-    withChildFunction(Itemlist, renderName),
-    getAllPlanet
-)
-const StarshipsList = withData(
-    withChildFunction(Itemlist, renderModelAndName),
-    getAllStarships
-)
+const mapPersonMethodsToProps = (swapiService) => {
+    return {
+        getData: swapiService.getAllPeople
+    }
+}
+
+const mapPlanetMethodsToProps = (swapiService) => {
+    return {
+        getData: swapiService.getAllPlanet
+    }
+}
+
+const mapStarshipsMethodsToProps = (swapiService) => {
+    return {
+        getData: swapiService.getAllStarships
+    }
+}
+
+const PersonList = withSwapiService(withData(
+    withChildFunction(Itemlist, renderName)), mapPersonMethodsToProps)
+
+const PlanetList = withSwapiService(withData(
+    withChildFunction(Itemlist, renderName)), mapPlanetMethodsToProps)
+
+const StarshipsList = withSwapiService(withData(
+    withChildFunction(Itemlist, renderModelAndName)), mapStarshipsMethodsToProps)
 
 
 export {
