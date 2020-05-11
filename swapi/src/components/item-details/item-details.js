@@ -3,7 +3,6 @@ import React, {Component} from "react"
 import './item-details.css'
 import SwapiService from "../../services/swapi-service";
 import Preloader from "../preloader";
-import ErrorButton from "../error-button";
 
 
 export const Record = ({item, field, label}) => {
@@ -31,7 +30,7 @@ export class ItemDetails extends Component {
         this.updateItem()
     }
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
+    componentDidUpdate(prevProps) {
         if (this.props.itemId !== prevProps.itemId ||
             this.props.getData !== prevProps.getData ||
             this.props.getImageUrl !== prevProps.getImageUrl) {
@@ -89,7 +88,6 @@ export class ItemDetails extends Component {
                                         return React.cloneElement(child, {item})
                                     })
                                 }
-                                <li className="list-group-item"><ErrorButton/></li>
                             </ul>
                         </div>
 

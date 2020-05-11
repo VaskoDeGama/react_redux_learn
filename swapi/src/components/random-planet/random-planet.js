@@ -68,7 +68,7 @@ export default class RandomPlanet extends Component {
         const content = hasData ? <PlanetView planet={planet} image={image}/> : null
 
         return (
-            <div className="random-planet jumbotron rounded mb-2">
+            <div className="random-planet jumbotron rounded mb-3">
                 {errorMessage}
                 {preloader}
                 {content}
