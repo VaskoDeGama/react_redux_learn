@@ -1,5 +1,5 @@
 import React, {Component} from "react"
-import SwapiService from "../../services/getResource"
+import SwapiService from "../../services/swapi-service"
 
 import './random-planet.css'
 import Preloader from "../preloader";

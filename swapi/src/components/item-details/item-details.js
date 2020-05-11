@@ -1,7 +1,7 @@
 import React, {Component} from "react"
 
 import './item-details.css'
-import SwapiService from "../../services/getResource";
+import SwapiService from "../../services/swapi-service";
 import Preloader from "../preloader";
 import ErrorButton from "../error-button";
 
