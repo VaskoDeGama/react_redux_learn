@@ -1,13 +1,21 @@
 import React, {Component} from "react"
-import SwapiService from "../../services/swapi-service"
-
+import PropTypes from 'prop-types'
 import './random-planet.css'
 import Preloader from "../preloader";
 import ErrorIndicator from "../error-indicator";
+import SwapiService from "../../services/swapi-service";
 
 export default class RandomPlanet extends Component {
 
     swapi = new SwapiService()
+
+    static defaultProps = {
+        updateInterval: 10000
+    }
+
+    static propTypes = {
+        updateInterval: PropTypes.number
+    }
 
     state = {
         planet: {},
@@ -16,11 +24,10 @@ export default class RandomPlanet extends Component {
         image: null
     }
 
-
-
     componentDidMount() {
+        const {updateInterval} = this.props
         this.upDatePlanet()
-        this.interval = setInterval(this.upDatePlanet, 10000)
+        this.interval = setInterval(this.upDatePlanet, updateInterval)
     }
 
     componentWillUnmount() {
@@ -77,9 +84,10 @@ export default class RandomPlanet extends Component {
     }
 }
 
+
+
 const PlanetView = ({planet, image}) => {
     const {name, population, rotationPeriod, diameter} = planet
-
 
     return (
         <React.Fragment>
