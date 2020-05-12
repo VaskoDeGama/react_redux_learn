@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {Component, useEffect, useState} from 'react';
 import ReactDOM from 'react-dom';
 
 
@@ -19,6 +19,7 @@ const App = () => {
                         setVisible(false)
                     }}
                 >hide</button>
+                <ClassCounter value={value}/>
                 <HookCounter value={value}/>
             </div>
         )
@@ -33,19 +34,31 @@ const App = () => {
 }
 
 
+class ClassCounter extends Component {
 
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        console.log('class: update')
+    }
+
+    componentDidMount() {
+        console.log('class: mount')
+    }
+
+    componentWillUnmount() {
+        console.log('class: unmount')
+    }
+
+    render() {
+        return <p>{this.props.value}</p>
+    }
+}
 
 const HookCounter = ({value}) => {
 
     useEffect(() => {
-        console.log('mount')
-        return () => console.log('unmount')
-    }, [])
-
-    useEffect(() => {
-        console.log('update')
+        console.log('useEffect')
+        return () => console.log('clear')
     }, [value])
-
 
     return <p>{value}</p>
 }
@@ -53,7 +66,7 @@ const HookCounter = ({value}) => {
 
 ReactDOM.render(
     <App />,
-  document.getElementById('root')
+    document.getElementById('root')
 );
 
 
