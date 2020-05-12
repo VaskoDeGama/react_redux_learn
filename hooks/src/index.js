@@ -20,7 +20,10 @@ const App = () => {
                     }}
                 >hide</button>
                 <HookCounter value={value}/>
+                <PlanetInfo id={value+1}/>
                 <HookPopUp value={value}/>
+
+
 
             </div>
         )
@@ -70,6 +73,23 @@ const HookPopUp = () => {
         </div>
     )
 
+}
+
+
+const PlanetInfo = ({id}) => {
+
+    const [planetName, setPlanetName] = useState('none')
+
+    useEffect( () => {
+        let cencelled = false
+        fetch(`https://swapi.dev/api/planets/${id}`)
+            .then(res => res.json())
+            .then(data => !cencelled && setPlanetName(data.name))
+        return () => cencelled = true
+    }, [id])
+    return (
+       <div>{id} -  {planetName}</div>
+    )
 }
 
 
