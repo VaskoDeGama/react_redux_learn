@@ -11,18 +11,19 @@ const App = () => {
             <div>
                 <button
                     onClick={() => {
-                        setValue(v => v+1)
+                        setValue(v => v + 1)
                     }}
-                >+</button>
+                >+
+                </button>
                 <button
                     onClick={() => {
                         setVisible(false)
                     }}
-                >hide</button>
+                >hide
+                </button>
                 <HookCounter value={value}/>
-                <PlanetInfo id={value+1}/>
+                <PlanetInfo id={value + 1}/>
                 <HookPopUp value={value}/>
-
 
 
             </div>
@@ -38,8 +39,6 @@ const App = () => {
 }
 
 
-
-
 const HookCounter = ({value}) => {
 
     useEffect(() => {
@@ -50,8 +49,6 @@ const HookCounter = ({value}) => {
     useEffect(() => {
         console.log('update')
     }, [value])
-
-
 
 
     return <p>{value}</p>
@@ -67,7 +64,7 @@ const HookPopUp = () => {
         return () => clearTimeout(timeout)
     }, [])
 
-    return  (
+    return (
         <div>
             {visible && <p>Hello</p>}
         </div>
@@ -75,29 +72,31 @@ const HookPopUp = () => {
 
 }
 
-
-const PlanetInfo = ({id}) => {
-
+const usePlanetInfo = (id) => {
     const [planetName, setPlanetName] = useState('none')
-
-    useEffect( () => {
+    useEffect(() => {
         let cencelled = false
         fetch(`https://swapi.dev/api/planets/${id}`)
             .then(res => res.json())
             .then(data => !cencelled && setPlanetName(data.name))
         return () => cencelled = true
     }, [id])
+
+    return planetName
+}
+
+const PlanetInfo = ({id}) => {
+
+    const name = usePlanetInfo(id)
     return (
-       <div>{id} -  {planetName}</div>
+        <div>{id} - {name}</div>
     )
 }
 
 
-
-
 ReactDOM.render(
-    <App />,
-  document.getElementById('root')
+    <App/>,
+    document.getElementById('root')
 );
 
 
