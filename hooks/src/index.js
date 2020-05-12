@@ -20,6 +20,8 @@ const App = () => {
                     }}
                 >hide</button>
                 <HookCounter value={value}/>
+                <HookPopUp value={value}/>
+
             </div>
         )
     } else {
@@ -47,8 +49,30 @@ const HookCounter = ({value}) => {
     }, [value])
 
 
+
+
     return <p>{value}</p>
 }
+
+
+const HookPopUp = () => {
+
+    const [visible, setVisible] = useState(true)
+
+    useEffect(() => {
+        const timeout = setTimeout(() => setVisible(false), 5000)
+        return () => clearTimeout(timeout)
+    }, [])
+
+    return  (
+        <div>
+            {visible && <p>Hello</p>}
+        </div>
+    )
+
+}
+
+
 
 
 ReactDOM.render(
