@@ -47,7 +47,7 @@ export default class App extends Component {
                                    render={() => <h2>Welcome to SWAPI </h2>}
                                    exact
                             />
-                            <Route path='/people' component={PeoplePage}/>
+                            <Route path='/people/:id?' component={PeoplePage}/>
                             <Route path='/planets' component={PlanetPage}/>
                             <Route path='/starships' exact component={StarshipPage}/>
                             <Route path='/starships/:id' render={({match}) => {

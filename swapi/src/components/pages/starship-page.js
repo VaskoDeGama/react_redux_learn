@@ -1,5 +1,5 @@
 import React from 'react'
-import {StarshipsList} from "../sw-components";
+import {StarshipsList} from "../sw-components"
 import {withRouter} from 'react-router-dom'
 
 const StarshipPage = ({history}) => {
@@ -7,10 +7,7 @@ const StarshipPage = ({history}) => {
 
         return (
             <StarshipsList
-                    onItemSelected={(itemId) => {
-                        const newPath = `/starships/${itemId}`
-                        history.push(newPath)
-                    }}
+                    onItemSelected={(itemId) => history.push(itemId)}
             />
         )
 
